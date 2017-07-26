@@ -1,4 +1,4 @@
-# Ukusanyaji-wa-Kiswahili-Kiingereza-Codeswitching (UKKC)  
+# UKKC (Ukusanyaji-wa-Kiswahili-Kiingereza-Codeswitching)  
 
   Huu ni ukusanyaji wa Tweets zinazojumuisha maneno ya Kiswahili na Kiingereza zote zawili kutoka Afrika Mashariki  
   
