@@ -23,4 +23,38 @@
    41.513683 **Mashariki - Eastern Longitude**  
    -1.826341 **Kaskazini - Northern Latitude**  
 
+# Language Identification
+
+  The Language identification program is trained on 5 million token texts from Swahili and English blogs (10 million tokens total). The models are trained on character trigrams, and vote between whether the token in question is English or Swahili based upon multiple trigram association measures found in the NLTK package.
+
+  For Identifying individual words, the Precision and Recall is as follows:
+
+    Swahili:
+
+      Precision = 0.84
+      Recall    = 0.94
+
+    English:
+
+      Precision = 0.94
+      Recall    = 0.82
+
+# Swahili-English Code-Switching Identification
+
+  To detect code-switching within a tweet, we use Logistic Regression to predict whether a tweet contains both Swahili and English. The features include:
+
+    Language identification algorithm scores for each token,
+    character trigrams,
+    tokens,
+    hashtags,
+    mentions,
+    geotags
+
+    Features with a frequency count under a threshold of 10 were excluded, resulting in the use of around 22,000 features. The Logistical Regression algorithm was implemented using the Scikit package for Python3.
+
+    For Identifying Code-Switching in Tweets, the Precision and Recall is as follows:
+
+    
+
+
 ###### Translations are my own. Corrections, Suggestions, and Comments are welcome!
