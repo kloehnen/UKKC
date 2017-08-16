@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 from nltk.collocations import TrigramCollocationFinder
 from nltk.collocations import TrigramAssocMeasures
 import string,nltk,re,math, numpy as np
@@ -6,10 +8,6 @@ trigram_measures = TrigramAssocMeasures()
 translate_table = dict((ord(char), None) for char in string.punctuation)
 
 def reportPR(score1,score2,total1,total2):
-  print(score1)
-  print(score2)
-  print(total1)
-  print(total2)
   false1 = total1 - score1
   false2 = total2 - score2
   # Precision = True Positives / True Positives + False Positives
@@ -45,12 +43,16 @@ def train_language(path,swa):
   words_all = list()
   totalTokens = 0
   maxTokens = 4955000
+  test = 10000
   # reading the file in unicode format using codecs library
   with open(path, encoding="ISO-8859-1") as file:
     for line in file:
       if swa:
         line = re.split(r"\t+",line)[4]
       # extracting the text sentence from each line
+      test += -1
+      if test == 0:
+        break
       for token in iter(re.split(r"\s+",filterLine(line))):
         if totalTokens != maxTokens:
           if token:
@@ -64,30 +66,34 @@ def train_language(path,swa):
 def char_ngrams(word, n, beg=' ', end=' '):
   """return list of char n-grams for a word (char ngrams, by convention)"""
   aword = beg * (n-1) + word + end * (n-1)
-  return [aword[ch:ch+n] for ch in range(len(aword) - n + 1)]
+  return [aword[ch:ch+n] for ch in range(len(aword)-n+1)]
+
 
 class LanguageModel:
   def __init__(self,path,swa):
     self.model, self.total = train_language(path,swa)
 
-  def getTotal(self):
-    return self.total
+
+  def scoreTrigram(self,trigram):
+    score = []
+    ixx,xix,xxi = trigram
+    score.append(self.model.score_ngram(trigram_measures.chi_sq,ixx,xix,xxi))
+    score.append(self.model.score_ngram(trigram_measures.jaccard,ixx,xix,xxi))
+    score.append(self.model.score_ngram(trigram_measures.likelihood_ratio,ixx,xix,xxi))
+    score.append(self.model.score_ngram(trigram_measures.pmi,ixx,xix,xxi))
+    score.append(self.model.score_ngram(trigram_measures.poisson_stirling,ixx,xix,xxi))
+    score.append(self.model.score_ngram(trigram_measures.student_t,ixx,xix,xxi))
+    for idx in range(len(score)):
+      if not score[idx]:
+        score[idx] = 0
+    return score
+
 
   def getScore(self,token):
     tokenNgrams = char_ngrams(token,3)
     overall = []
     for trigram in tokenNgrams:
-      score = []
-      ixx,xix,xxi = trigram
-      score.append(self.model.score_ngram(trigram_measures.chi_sq,ixx,xix,xxi))
-      score.append(self.model.score_ngram(trigram_measures.jaccard,ixx,xix,xxi))
-      score.append(self.model.score_ngram(trigram_measures.likelihood_ratio,ixx,xix,xxi))
-      score.append(self.model.score_ngram(trigram_measures.pmi,ixx,xix,xxi))
-      score.append(self.model.score_ngram(trigram_measures.poisson_stirling,ixx,xix,xxi))
-      score.append(self.model.score_ngram(trigram_measures.student_t,ixx,xix,xxi))
-      for idx in range(len(score)):
-        if not score[idx]:
-          score[idx] = 0
+      score = scoreTrigram(trigram)
       overall.append(score)
       seq = np.sum(np.array(overall),axis=0)
     if seq.size != 6:
@@ -125,16 +131,17 @@ class PRTest:
         print("missed %s" % (token))
     return (self.score,self.total)
 
-Swa = LanguageModel(path="/Users/pokea/Desktop/swa",swa=True)
-Eng = LanguageModel(path="/Users/pokea/Desktop/eng",swa=False)
+#Swa = LanguageModel(path=("/Users/pokea/Documents/Work/UofA/"
+#  "Current/Dissertation/Productivity/Corpora/LanguageModels/Train/swa"),swa=True)
+#Eng = LanguageModel(path=("/Users/pokea/Documents/Work/UofA/"
+#  "Current/Dissertation/Productivity/Corpora/LanguageModels/Train/eng"),swa=False)
 
-SwaTotal = Swa.getTotal()
-EngTotal = Eng.getTotal()
+#P1 = PRTest(Swa,Eng,('/Users/pokea/Documents/Work/UofA/'
+#  'Current/Dissertation/Productivity/Corpora/LanguageModels/Test/swa'))
+#P2 = PRTest(Eng,Swa,('/Users/pokea/Documents/Work/UofA/'
+#  'Current/Dissertation/Productivity/Corpora/LanguageModels/Test/eng'))
 
-P1 = PRTest(Swa,Eng,'/Users/pokea/Desktop/Swa_Test')
-P2 = PRTest(Eng,Swa,'/Users/pokea/Desktop/Eng_Test')
+#score1,total1 = P1.getTotals()
+#score2,total2 = P2.getTotals()
 
-score1,total1 = P1.getTotals()
-score2,total2 = P2.getTotals()
-
-reportPR(score1,score2,total1,total2)
+#reportPR(score1,score2,total1,total2)

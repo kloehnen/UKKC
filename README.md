@@ -1,14 +1,14 @@
 # UKKC (Ukusanyaji-wa-Kiswahili-Kiingereza-Codeswitching)  
 
-  Huu ni ukusanyaji wa Tweets zinazojumuisha maneno ya Kiswahili na Kiingereza zote zawili kutoka Afrika Mashariki  
+    Huu ni ukusanyaji wa Tweets zinazojumuisha maneno ya Kiswahili na Kiingereza zote zawili kutoka Afrika Mashariki  
   
-  **This is a collection of tweets which contain words of both Swahili and English from East Africa**  
+    **This is a collection of tweets which contain words of both Swahili and English from East Africa**  
 
 # Uumbaji wa UKKC
 
-  Ukusanyaji huu wametengeneza kwa kukusanya Tweets kutoka Afrika Mashariki. Tweets zimechuja kwa Lugha. Kama Twitter hawana kitambulisho cha Lugha ya Kiswahili, Tweets zote zimechuja kwa algorithm ya Machine Learning. Algorithm hii inatafuta lugha za Kiswahili na Kiingereza zote zawili Tweetini. Algorithm hii inapatikana pa CSidentify.py  
+    Ukusanyaji huu wametengeneza kwa kukusanya Tweets kutoka Afrika Mashariki. Tweets zimechuja kwa Lugha. Kama Twitter hawana kitambulisho cha Lugha ya Kiswahili, Tweets zote zimechuja kwa algorithm ya Machine Learning. Algorithm hii inatafuta lugha za Kiswahili na Kiingereza zote zawili Tweetini. Algorithm hii inapatikana pa CSidentify.py  
   
-  **This corpus was created by collecting geographically tagged tweets from East Africa and filtering them by the language spoken. As Twitter does not have a Swahili language identifier, all tweets are filtered using a machine learning algorithm which searches for both English and Swahili in a given document (Tweet). This algorithm can be found in CSidentify.py**  
+    **This corpus was created by collecting geographically tagged tweets from East Africa and filtering them by the language spoken. As Twitter does not have a Swahili language identifier, all tweets are filtered using a machine learning algorithm which searches for both English and Swahili in a given document (Tweet). This algorithm can be found in CSidentify.py**  
 
   Uumbaji wa kisasa wanazojumuisha Tweets zilizochanga 10/2015 mpaka 11/2016.  
   
@@ -18,10 +18,10 @@
    
    **The coordinates used to collect the Tweets are as follows:**  
    
-   35.031750 **Magharibi - Western Longitude**  
-   -11.019555 **Kusini - Southern Latitude**  
-   41.513683 **Mashariki - Eastern Longitude**  
-   -1.826341 **Kaskazini - Northern Latitude**  
+    35.031750    **Magharibi  - Western Longitude**  
+    -11.019555    **Kusini  - Southern Latitude**  
+    41.513683    **Mashariki  - Eastern Longitude**  
+    -1.826341    **Kaskazini  - Northern Latitude**  
 
 # Language Identification
 
@@ -41,7 +41,13 @@
 
 # Swahili-English Code-Switching Identification
 
-  To detect code-switching within a tweet, we use Logistic Regression to predict whether a tweet contains both Swahili and English. The features include:
+  The goal of this algorithm is to identify tweets such as the following:
+
+    There's a breakout of kipindupindu hapa Lower Karen. Sasa ni Kuavoid kibandaski like it never existed.
+
+  We label a tweet as containing Swahili English Code-Switching when English or Swahili are the matrix language, and there is a sequence of multiple words for the other language (Myers-Scotton 1997). We do not include non proper-nouns (Named Entities) as examples of Code-Switching.
+
+  To detect code-switching within a tweet, we train a Logistic Regression model with tweets hand tagged as Code-Switched. For the algorithm, we extract various featuresxw:
 
     Language identification algorithm scores for each token,
     character trigrams,
@@ -54,7 +60,9 @@
 
     For Identifying Code-Switching in Tweets, the Precision and Recall is as follows:
 
-    
 
+# Sources
+
+  Myers-Scotton, Carol. Duelling languages: Grammatical structure in codeswitching. Oxford University Press, 1997.
 
 ###### Translations are my own. Corrections, Suggestions, and Comments are welcome!

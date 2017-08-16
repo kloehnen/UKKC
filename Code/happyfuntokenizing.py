@@ -200,3 +200,5 @@ class TweetTokenizer(object):
                 pass
             tweet = tweet.replace(amp, " and ")
         return tweet
+
+tok = TweetTokenizer()
