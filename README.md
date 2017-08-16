@@ -14,9 +14,9 @@
   Mahali ya Tweets yanafuata:  
   >The coordinates used to collect the Tweets are as follows:  
 
-  **Magharibi** **Kusini**  **Mashariki** **Kaskazini**
-  35.031750 -11.019555  41.513683 -1.826341
-  >**Western Longitude**  **Southern Latitude** **Eastern Longitude** **Northern Latitude**
+  **Magharibi**|**Kusini**|**Mashariki**|**Kaskazini**  
+  35.031750|-11.019555|41.513683|-1.826341  
+  >**Western Longitude**|**Southern Latitude**|**Eastern Longitude**|**Northern Latitude**  
 
 # Language Identification
 
