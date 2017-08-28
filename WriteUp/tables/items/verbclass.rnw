@@ -1,0 +1,141 @@
+% Morpheme Chart
+\begin{tabular}[t]{l|l|l|l}
+  % Header with a lot of shortstacks
+  \shortstack{\textbf{Morpheme}     \\  \textbf{Class}}       &
+  \shortstack{\textbf{Form} \\ {\indent}}                                  & 
+  \shortstack{\textbf{Grammatical} \\  \textbf{Distinction}}  & 
+  \shortstack{\textbf{Example} \\ {\indent}}
+  \\
+  \hline
+  % Body with all the morphemes tested
+  \hline
+  % 1SG Subject
+  ni-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 1/2 - 1SG} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  ni- & -na- & -fikiri  \\ 
+  \textsc{1sg} & \textsc{pres} & \textit{think}\\
+  \multicolumn{3}{l}{'I think.'}\\
+  \end{tabular}\\
+  \hline
+  % 2sg Subject
+  u-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 1/2 - 2SG} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  u- & -na- & -sema  \\ 
+  \textsc{2sg} & \textsc{pres} & \textit{speak}\\
+  \multicolumn{3}{l}{'You speak.'}\\
+  \end{tabular}\\
+  \hline
+  % 3SG Subject
+  an-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 1/2 - 3SG} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  an- & -na- & -sema  \\ 
+  \textsc{3sg} & \textsc{pres} & \textit{kula}\\
+  \multicolumn{3}{l}{'S/he eats.'}\\
+  \end{tabular}\\
+  \hline
+  % 1pl Subject
+  tu-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 1/2 - 1PL} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  tu- & -na- & -ingia  \\ 
+  \textsc{1pl} & \textsc{pres} & \textit{enter}\\
+  \multicolumn{3}{l}{'We enter.'}\\
+  \end{tabular}\\
+  \hline
+  % 2PL Subject
+  m-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 1/2 - 2PL} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  m- & -na- & -kunywa  \\ 
+  \textsc{2pl} & \textsc{pres} & \textit{kunywa}\\
+  \multicolumn{3}{l}{'You all drink.'}\\
+  \end{tabular}\\
+  \hline
+  % 3PL Subject
+  wa-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 1/2 - 3PL} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  wa- & -na- & -shinda  \\ 
+  \textsc{3pl} & \textsc{pres} & \textsc{win}\\
+  \multicolumn{3}{l}{'They win.'}\\
+  \end{tabular}\\
+  \hline
+  % Class 3 Subject
+  u-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 3} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  u- & -na- & -ota  \\ 
+  \textsc{cl3} & \textsc{pres} & \textit{grow}\\
+  \multicolumn{3}{l}{'It grows.'}\\
+  \end{tabular}\\
+  \hline
+  % Class 4 Subject
+  i-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 4} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  i- & -na- & -ota  \\ 
+  \textsc{cl4} & \textsc{pres} & \textit{grow}\\
+  \multicolumn{3}{l}{'They grow.'}\\
+  \end{tabular}\\
+  \hline
+  % Class 5 Subject
+  li-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 5} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  li- & -na- & -fungua  \\ 
+  \textsc{cl5} & \textsc{pres} & \textit{open}\\
+  \multicolumn{3}{l}{'It opens'}\\
+  \end{tabular}\\
+  \hline
+  % Class 6 Subject
+  ya-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 6} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  ya- & -na- & -fungua  \\ 
+  \textsc{cl6} & \textsc{pres} & \textit{open}\\
+  \multicolumn{3}{l}{'They open.'}\\
+  \end{tabular}\\
+\end{tabular}\\

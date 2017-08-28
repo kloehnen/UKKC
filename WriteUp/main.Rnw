@@ -1,0 +1,778 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,lsalike,units,ifthen,tikz,graphicx,float}
+\usepackage{rotating} 
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage{draftwatermark}
+\usetikzlibrary{calc}
+\usetikzlibrary{automata, positioning}
+
+
+%Watermark
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{10}
+%probability operator
+\newcommand{\p}{{\operatorname{p}}}
+\newcommand{\s}{Swahili}
+\newcommand{\pr}{productivity}
+\newcommand{\ling}{lingusitic}
+\newcommand{\li}{likelihood}
+\newcommand{\nc}{noun class}
+%equation number; no math; no label
+%equation number; no math; no label
+\newcommand{\eq}[1]{\bigskip\par
+\stepcounter{equation}
+\noindent\parbox{.5in}{(\theequation)}
+\begin{minipage}[t]{4.5in}
+#1
+\end{minipage}
+\par\bigskip}
+
+%equation number; no math; with label
+\newcommand{\eqlab}[2]{\bigskip\par
+\refstepcounter{equation}
+\noindent\parbox{.5in}{(\theequation)}
+\label{#1}
+\begin{minipage}[t]{4.5in}
+#2
+\end{minipage}
+\par\bigskip}
+
+\title{Morphological Use in Swahili}
+%\author{Nick Kloehn \& Michael Hammond \\
+%U.\ of Arizona}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+%Intro 
+\section*{Morphological Productivity in Swahili}
+
+%Here, I'm going to summarize the aims of this paper, and eventually describe the major claims.
+
+%I'll hold off on this until later on. Do I need to focus on Gender to make this better?
+%What would a gender paper look like? Well, Gender in Swahili is complicated.
+%First, I need to look at Swahili morphology.
+
+%I'll add some of what I've done and I'll do some more work on facts about the language, maybe add some lexico-statistics. I also have the wikipedia corpus. There will be a lot of paradigms here, but I can focus on what's important.
+
+% Let's count the number of nouns in the language and what gender each noun is.
+
+%Second, I need to look at Productivity.
+
+%This will be tricky. I need to know all the literature. This is my week point. Summarize different perspectives of morphology, and discuss the claims. 
+
+%Third, I need to show what I've done and why.
+
+%Fourth, I need to show what it means.
+
+<<LexicostatsStart,eval=TRUE,echo=FALSE,fig.keep='last',results="asis",include=TRUE,fig.cap=''>>=
+rm(list=ls())
+library(xtable)
+setwd('../Sources')
+# Read in lexical data
+df <- read.table("HSC_Lexicostats.txt", sep="\t", header=TRUE)
+# Calculate Frequency per million
+permil <- function(value){
+  size = as.numeric(df$Frequency[1])
+  return((value / size) * 1000000)
+}
+df$"Frequency (per million)" <- lapply(df$Frequency,permil)
+@
+Below is a basic summary of open categories in Swahili
+<<Lexicostats1,eval=TRUE,echo=FALSE,fig.keep='last',results="asis",include=TRUE,fig.cap=''>>=
+print(xtable(df[c(2,3,4),]),include.rownames=FALSE)
+@
+
+<<Lexicostats2,eval=TRUE,echo=FALSE,fig.keep='last',results="asis",include=TRUE,fig.cap=''>>=
+print(xtable(df[c(4,5,6),]),include.rownames=FALSE)
+@
+
+<<Lexicostats3,eval=TRUE,echo=FALSE,fig.keep='last',results="asis",include=TRUE,fig.cap=''>>=
+newdf <- df[c(7:21),]
+# Calculate Noun Class as a percentage of total nouns
+perNoun <- function(value){
+  size = as.numeric(df$"Frequency (per million)"[4])
+  return((value / size) * 100)
+}
+
+shorten <- function(string){
+  string <- as.character(string)
+  return(substr(string,6,nchar(string)))
+}
+
+newdf$"Proportion of Nouns" <- lapply(newdf$"Frequency (per million)",perNoun)
+names <- lapply(rev(newdf[,1]),shorten)
+barplot(as.numeric(rev(newdf$"Proportion of Nouns")),main="The Proportion of Nominals in each Noun Class", 
+  	xlab="Proportion of Nouns",ylab = "Noun Class",horiz=TRUE,	names.arg = names,las=2)
+@
+The aim of this chapter is to isolate the predictors of novel word formation for words containing a given affix. In the past, it has been argued that parsibility and therefore productivity can be predicted by comparing the relationship between the log frequencies of all types of a given affix to the log frequencies of their affixless counterparts \cite{hay02}. Here, productivity occurs when for a given affix, the majority of affixless forms occur more frequently than their affixed counterparts. This measure of productivity has also been said to correlate with the number of hapaxes of a given type, which itself has been argued to correlate with productivity \cite{baay92}. Although our main interest is to understand the parameters of nominal classification, this section will also investigate novel word formation in both verbal and nominal affixes for both inflectional and derivational flavors. Increasing the empirical coverage of this comparison will allow us to ground one of the central questions of this investigation. This question has to do with an important typological aspect of Swahili morphology. Whereas languages like English and Dutch allow affixless forms of words, inflectional classes in Swahili require the existence of some affix at all times. Here, we will test and compare the prevalance of this type of affix with stems containing derivational classes, which may occur without some affix. In simple terms, for many Swahili affixes, there is no such thing as an affixless or non-derived forms, altering the forumlation of the ratio such that all inflectional morphemes will have un-derived frequencies of zeros. Here the model in it's current form would predict that no inflectional form should be parsible and therefore productive, although we  know this not to be the case. On the contrary, inflectional forms should nearly always be productive. To get around this we will work with the hypothesis that for these affixes, the frequency of morphological competitors (known as the cumulative root frequency \cite{cole89}) is key in predicting productivity of affixes of this type. This hypothesis implicitly alters our morphological model to suggest that productivity is not a result of discrimination between an affixed form and its affixless counterpart, but descrimination between an affix and all of its competitors of which the affixless form is just one possibility. If this parameter were true, we would be tempted to adopt a model of morphological systems that argue that descrimination is key in constructing paradigms \cite{blev2015}.
+
+\noindent Here, we analyze the relationship between multiple standard methods of measuring affix productivity, and try to predict the existence of novel word forms of that affix. These measures of productivity are taken by analyzing the frequencies of word forms found in the Helsinki Corpus of Swahili, and then comparing them to novel forms found in the corpus using a k-folds method of cross validation. Simply, we subdivide the corpus into multiple parts and compare measures of morpheme productivity in one random subset to our dependent variable in another non-overlapping subset, k times. After establishing which measures are able to meaningfully predict productivty, we test this measure using twitter data extracted from a corpus of code-switched tweets.
+
+\subsection{Methods}
+
+We took 60 affixes of Swahili tagged in the Helsinki Corpus of Swahili of 13.2 million words. The corpus was accessed online via SSH, and frequency counts were extracted using a Python script. For each affix, we counted all types and their token frequency. Tokens in the corpus are tagged for both the affixed forms and the affixless lemmas and so we were able to automatically identify and count them. For each type, we then extracted the "affixless" forms by using a series of regular expressions. After extracting the bare forms, we then extracted the count of all variants of the form that did not include the original affixed form. Together, this allowed us to calculate the frequencies of all types of an affix, and their competative cumulative root frequencies.
+
+\noindent This operation was performed on seven different random subsections of the corpus (of roughly 1.8 million words). For each subsection, we log transformed the frequency counts, and for each affix calculated how many types had a larger cumulative root frequency than affixed frequency. This number divided by the total type count gives us a ratio that should indicate the level of productivity. The higher the ratio, the more likely that that affix is to be productive. 
+
+\noindent Next, we counted all the hapaxes of a given affix in a second random subset of the corpus. Essentially, we treat these counts as a measure of novel word formation. The idea here is that if an affix is productive, it should exhibit novel word formation. Furthermore, the working hypothesis is that more productive forms should exhibit a large number of novel words. So, if the type ratio is a predictor for productivity, then the ratio of the affix established in the previous subset should correlated with the number of hapaxes in the second subset.
+
+\noindent Below are the affixes used in this study. There are four groups, which are divided by whether they occur nominally or verbally, and by whether they mark what we typically associate with inflectional, or derivational properties. These groups are not balanced, as they are unlikely to be in any language, but we've used the available tagsest developed by the creators of the corpus \cite{hcs}.
+
+% These are all the types used
+\begin{table}[t]
+\caption{Verbal Extensions (Verbal Derivation Suffixes/Infixes)}
+\Sexpr{knit_child('tables/items/verbext.rnw')}
+\end{table}
+
+\clearpage
+
+\begin{table}[t]
+\caption{Subject Agreement (Verbal Inflection Prefixes)}
+\Sexpr{knit_child('tables/items/verbclass.rnw')}
+\end{table}
+
+\clearpage
+
+\begin{table}[t]
+\Sexpr{knit_child('tables/items/verbclass2.rnw')}
+\end{table}
+
+\clearpage
+
+\begin{table}[t]
+\caption{Nominal Derivational Suffixes}
+\Sexpr{knit_child('tables/items/derclass.rnw')}
+\end{table}
+
+\clearpage
+
+\begin{table}[t]
+\Sexpr{knit_child('tables/items/derclass2.rnw')}
+\end{table}
+
+\clearpage
+
+\begin{table}[t]
+\caption{Noun Class Markers (Nominal Inflection Prefixes)}
+\Sexpr{knit_child('tables/items/nclass.rnw')}
+\end{table}
+
+\clearpage
+
+\begin{table}[t]
+\Sexpr{knit_child('tables/items/nclass2.rnw')}
+\end{table}
+
+\clearpage
+
+\subsection{Results}
+
+We constructed a scatter plot  including all data points from all subsets. So, these points are composed of the productivity ratio for each affix in each subset of the corpus (60 affixes x 7 subsets = 420 points) and are plotted them against the log of the number of hapaxes in each of the second subsets. We predict that if cumulative root frequency is the key to productivity in these forms, then there should be a significant correlation between these two variables.
+
+<<HapaxData,eval=TRUE,echo=TRUE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus, r-squared = 0.2411, F(1,418) = 134.1, p less-than 2.2e16.'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Calculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Ratio, data = Main,
+  xlab = "Cumulative Root Type Ratio",
+  ylab = "Log Number of Hapaxes per Type",
+  main = "All Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Ratio, data = Main)
+
+abline(fit <- lm(loghap ~ Ratio, data=Main), col='red')
+legend("topleft", bty="n", legend=paste("r-squared is", 
+  format(summary(fit)$adj.r.squared, digits=4)))
+
+summary(hd.mod1)
+@
+<<HapaxDataSlope,eval=TRUE,echo=TRUE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus, r-squared = 0.2411, F(1,418) = 134.1, p less-than 2.2e16.'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Calculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Slope, data = Main,
+  xlim=c(0, 2),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Slope",
+  ylab = "Log Number of Hapaxes per Type",
+  main = "All Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Slope, data = Main)
+
+abline(fit <- lm(loghap ~ Slope, data=Main), col='red')
+legend("topleft", bty="n", legend=paste("r-squared is", 
+  format(summary(fit)$adj.r.squared, digits=4)))
+
+summary(hd.mod1)
+@
+
+<<HapaxDataYintercept,eval=TRUE,echo=TRUE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus, r-squared = 0.2411, F(1,418) = 134.1, p less-than 2.2e16.'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Calculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Yintercept, data = Main,
+  xlim=c(0, 2),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Y-Intercept",
+  ylab = "Log Number of Hapaxes per Type",
+  main = "All Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Yintercept, data = Main)
+
+abline(fit <- lm(loghap ~ Ratio, data=Main), col='red')
+legend("topleft", bty="n", legend=paste("r-squared is", 
+  format(summary(fit)$adj.r.squared, digits=4)))
+
+summary(hd.mod1)
+@
+For all 60 affixes, there is a significant correlation between Cumulative Root Frequency Ratio and the number of hapaxes of that type in non overalapping subsets. This correlation exists regardless of whether there the affix is verbal, or nominal, and derivational or inflectional. This indicates first, that in Swahili there is a correspondence between affixation and the type ratio, and furthermore, that the frequency of morphologically related competitors, and not the frequency of the bare stem, makes the correct prediction both in situations where a bare stem is possible, as well as situations where they are not.
+
+This effect hold true when we evaluate the inflection affixes alone, as seen below, as well as for the derivational affixes alone.
+
+<<HapaxDataInflection,eval=TRUE,echo=FALSE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus for all Inflection affixes, r-squared = 0.2632, F(1,236) = 85.65, p less-than 2.2e16.'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Caluculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Replace ones divided by zero with zero
+Main$Ratio[is.nan( Main$Ratio ) ] <- 0
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+# Choose only Inflectional Forms
+mdl1 <- subset(Main, Derivational == FALSE)
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Ratio, data = mdl1,
+  xlim=c(0, 1),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Ratio",
+  ylab = "Number of Hapaxes per Type",
+  main = "All Inflectional Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Ratio, data = mdl1)
+
+abline(fit <- lm(loghap ~ Ratio, data=mdl1), col='red')
+legend("topleft", bty="n", legend=paste("R2 is", 
+  format(summary(fit)$adj.r.squared, digits=4)))
+
+
+summary(hd.mod1)
+@
+
+<<HapaxDataInflectionNom,eval=TRUE,echo=FALSE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus for all Inflection affixes, r-squared = 0.2632, F(1,236) = 85.65, p less-than 2.2e16.'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Caluculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Replace ones divided by zero with zero
+Main$Ratio[is.nan( Main$Ratio ) ] <- 0
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+# Choose only Inflectional Forms
+mdl1 <- subset(Main, Derivational == FALSE)
+mdl1 <- subset(mdl1, Nominal == TRUE)
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Ratio, data = mdl1,
+  xlim=c(0, 1),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Ratio",
+  ylab = "Number of Hapaxes per Type",
+  main = "Nominal Inflectional Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Ratio, data = mdl1)
+
+#abline(fit <- lm(loghap ~ Ratio, data=mdl1), col='red')
+#legend("topleft", bty="n", legend=paste("R2 is", 
+#  format(summary(fit)$adj.r.squared, digits=4)))
+
+
+summary(hd.mod1)
+@
+
+<<HapaxDataDerivation,eval=TRUE,echo=FALSE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus for all Derivational affixes, r-squared = 0.04457, F(1,180) = 9.444, p less-than 0.002448'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Caluculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Replace ones divided by zero with zero
+Main$Ratio[is.nan( Main$Ratio ) ] <- 0
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+mdl1 <- subset(Main, Derivational == TRUE)
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Ratio, data = mdl1,
+  xlim=c(0, 1),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Ratio",
+  ylab = "Number of Hapaxes per Type",
+  main = "All Derivational Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Ratio, data = mdl1)
+
+abline(fit <- lm(loghap ~ Ratio, data=mdl1), col='red')
+legend("topleft", bty="n", legend=paste("R2 is", 
+  format(summary(fit)$adj.r.squared, digits=4)))
+
+
+summary(hd.mod1)
+@
+
+<<HapaxDataDerivationSlope,eval=TRUE,echo=FALSE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus for all Derivational affixes, r-squared = 0.04457, F(1,180) = 9.444, p less-than 0.002448'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Caluculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Replace ones divided by zero with zero
+Main$Ratio[is.nan( Main$Ratio ) ] <- 0
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+mdl1 <- subset(Main, Derivational == TRUE)
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Slope, data = mdl1,
+  xlim=c(0, 3),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Slope",
+  ylab = "Number of Hapaxes per Type",
+  main = "All Derivational Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Slope, data = mdl1)
+
+abline(fit <- lm(loghap ~ Ratio, data=mdl1), col='red')
+legend("topleft", bty="n", legend=paste("R2 is", 
+  format(summary(fit)$adj.r.squared, digits=4)))
+
+
+summary(hd.mod1)
+@
+
+<<HapaxDataDerivationYintercept,eval=TRUE,echo=FALSE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus for all Derivational affixes, r-squared = 0.04457, F(1,180) = 9.444, p less-than 0.002448'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Caluculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Replace ones divided by zero with zero
+Main$Ratio[is.nan( Main$Ratio ) ] <- 0
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+mdl1 <- subset(Main, Derivational == TRUE)
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Yintercept, data = mdl1,
+  xlim=c(0, 10),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Y-intercept",
+  ylab = "Number of Hapaxes per Type",
+  main = "All Derivational Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Yintercept, data = mdl1)
+
+abline(fit <- lm(loghap ~ Ratio, data=mdl1), col='red')
+legend("topleft", bty="n", legend=paste("R2 is", 
+  format(summary(fit)$adj.r.squared, digits=4)))
+
+
+summary(hd.mod1)
+@
+
+<<HapaxDataNomDerivation2,eval=TRUE,echo=FALSE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is positively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus for Nominal Derivational affixes, r-squared = 0.05092, F(1,180) = 9.444, p less-than 0.0003'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Caluculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Replace ones divided by zero with zero
+Main$Ratio[is.nan( Main$Ratio ) ] <- 0
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+mdl1 <- subset(Main, Nominal == TRUE)
+mdl1 <- subset(mdl1, Derivational == TRUE)
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Ratio, data = mdl1,
+  xlim=c(0, 1),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Ratio",
+  ylab = "Number of Hapaxes per Type",
+  main = "Nominal Derivational Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Ratio, data = mdl1)
+
+#abline(fit <- lm(loghap ~ Ratio, data=mdl1), col='red')
+#legend("topleft", bty="n", legend=paste("R2 is", 
+#  format(summary(fit)$adj.r.squared, digits=4)))
+
+
+summary(hd.mod1)
+@
+
+<<HapaxDataVerbalDerivation,eval=TRUE,echo=FALSE,fig.keep='last',include=TRUE,fig.cap='The Cumulative Root Frequency Ratio is negatively correlated with the number of hapaxes in a non overlapping, but equal-sized subset of the corpus for Verbal Derivational affixes, r-squared = 0.1539, F(1,166) = 30.18, p less-than 0.000001'>>=
+rm(list=ls())
+setwd('../Sources')
+
+# Read in kfolds data
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)
+
+# Caluculate Type Ratio
+Main <- transform(Main, Ratio = Above / Total)
+
+# Make it a dataframe
+Main <- data.frame(Main)
+
+# Replace ones divided by zero with zero
+Main$Ratio[is.nan( Main$Ratio ) ] <- 0
+
+# Replace ones divided by zero with zero
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0
+
+# Convert the frequency counts to logarithmic scale
+Main$loghap <- log(Main$Hapaxes)
+
+# Replace ones divided by zero with zero
+Main$loghap[ is.nan(Main$loghap ) ] <- 0
+
+# Replace negative values with zero
+Main$loghap[ Main$loghap < 0 ] <- 0
+
+mdl1 <- subset(Main, Nominal == FALSE)
+mdl1 <- subset(mdl1, Derivational == TRUE)
+
+# Ratio is the independant variable, and hapaxes are the dependent variable
+plot(loghap ~ Ratio, data = mdl1,
+  xlim=c(0, 1),
+  ylim=c(0, 10),
+  xlab = "Cumulative Root Type Ratio",
+  ylab = "Number of Hapaxes per Type",
+  main = "Verbal Derivational Affixes"
+)
+
+hd.mod1 = lm(loghap ~ Ratio, data = mdl1)
+
+#abline(fit <- lm(loghap ~ Ratio, data=mdl1), col='red')
+#legend("topleft", bty="n", legend=paste("R2 is", 
+#  format(summary(fit)$adj.r.squared, digits=4)))
+
+
+summary(hd.mod1)
+@
+\section{Twitter Corpus}
+
+Now that we've established a mechanism for predicting the production of novel types, we will expand the investigation to another corpus that will bolster these findings. Since we're using novelty as a means of identifying productivity, it's in our interest to establish true novelty, and not just an approximation of it. Ideally, one could elicit novel derived forms from speakers of Swahili by prompting them in a behavioral study. However, this sort of experiment would take a lot of work basically, and so another way to get there is to look at examples of words that we must assume to be productive uses given their content. Here, we make the assumption that novelty is associated not with hapaxes alone, but also with borrowed word forms that have recently occured. Fortunately, many Swahili speakers also speak English to various degrees, and not only that, but they choose to communicate with English and Swahili interchangeably on social media. Often, speakers will communicate in Swahili but will rely heavily on English borrowings when using open class word categories, which seems to be a thing in code switching (sources? theories? bleck). If speakers are incorporating English nominal and verbal borrowings into their language, and if we consider these instances to be examples of novel use, then we would consider the use of any examples of morphological marking to be examples of true novel use, and therefore productivity.
+
+Given this, social media provides an opportunity to observe unprompted productivity in the wild. One platform that is particularly useful for these purposes is Twitter, for a few reasons. First, Twitter data is publicly available and there are a few interfaces that allow us to easily stream and save Tweets in real time. Second, we are able to filter these tweets based upon a few parameters that allow us to narrow the scope of inquiry. The most important of this is the geographic fiter that allows us to capture tweets written within a specific geographic area. For our purposes, this means that we can limit our range of tweets to include only those written in East Africa.
+
+With there two parameters, we are able to filter out Tweets that are much less likely to contain languages other than Swahili and English. In order to further filter the data, we use a method of machine learning-based automatic language identification that allows us to pick individual 120 character tweets based upon their language. Given our empirical question about productivity, we want to find words that are recent borrowings in Swahili from English. Therefore, we want to identify tweets that contain both some degree of English, and some degree of Swahili. For our purposes, we'll label these tweets as code-switched tweets, and will tune our machine learning algorithm to identify tweets of this type. In the next section, we describe the development and creation of a corpus of code-switched tweets. In addition to these, we also create a corpus of Swahili tweets for comparison.
+
+\subsection{Corpus Creation}
+
+The aim of this section is to describe the development of a corpus using an automated mechanism of identifying the phenomenon of code-switching within a tweet. We define Code-Switching as the use of at least two separate languages within a single document. For the purposes of this study, the languages in question are Swahili and English, and the domain of inquiry is limited to twitter data originating from East Africa. Here, a single tweet constitutes a document, and therefore classification is binomial: Does a tweet contain CS or not?
+
+\eq{
+Herrera anajaribu stunts za Phelps
+}
+
+In order to perform this task, the system must correctly identify CS in documents containing phrases such as the one above. The example in (1) constitutes CS by virtue of the presence of multiple Swahili words, and that of an English common noun (i.e. \textit{stunts}). Crucially, the system must ignore proper nouns that may be borrowed from English or other languages  contains two proper nouns (i.e. \textit{Herrera} and \textit{Phelps}). This descrimintation task is performed using supervized learning, meaning  all tweets are labeled as either having CS or not in the training phase by hand. For a baseline, the machine then descriminates which prespecified features are associated with CS by means of the descriminitive learning algorithm of Logistic Regression. A second model  uses both English and Swahili classifiers to determine the count of Swahili and English words within a document. A judgement of whether CS occurs is then attested to whether or not both languages are detected within the same document.
+
+\subsubsection{Methods}
+
+As stated above, the task of CS identification is performed using supervised learning. Documents were collected using Twitter's streaming API to isolate geotagged tweets originating from the region of East Africa where Swahili is spoken both as a native language, and as an official language. These tweets were hand labeled as either English (0), Swahili (1), CS (2), or lacking any language/or having some third language (e.g. Portuguese)(3). For the current task, CS labels were altered to be positive (1) and all others were changed to negative (0). The training data contained 1,200 tweets balanced accross the 4 categories described above, and test contained a random sample of 100 tweets.
+
+\subsubsection{Preprocessing}
+
+The tweets were tokenized using a Twitter specific tokenizer, altered  from code made publicly available (). The tokenizer code was altered to extract and replace mentions (users mentioned within a tweet), hashtags (topics of discussion), and urls (weblinks provided within the tweet). These entities were replaced with variables denoting the entity type in order to preserve the fact that such entities were used in a tweet, but to also generalize across the usage of these entities. These entities were then effectively added or taken away from the model in the development stage in order to test whether their inclusion influenced performance.
+
+\subsubsection{Feature Selection}
+
+The primary feature used for language identification was character 5-grams and tokens as per the features used in previous studies \cite{tan14}. To extract 5-grams, a token is given a single start and 4 end symbols. The number of 5-grams extracted is exactly the number of characters in the token + 1, as in (2):
+
+\eq{
+\begin{tabular}[t]{lll}
+  \textit{stunts} & $\rightarrow$ & [\^{}stun, stunt, tunts, unts\$, nts\$\$, ts\$\$\$, s\$\$\$\$] \\
+\end{tabular}
+}
+
+Along with 5-grams, individual tokens, hashtags, mentions, and geotags were included as features. Features with a frequency count under a threshold of 10 were excluded, resulting in the use of around 22,000 features. Multiple generative, and descrimintative algorithms were tests, and finally Logistical Regression was decided upon as the best classifier (data included in coming section). The Logistical Regression algorithm was implemented usning the Scikit package for Python. The performance of the baseline model is discussed in the coming section.
+
+\subsubsection{Voting Algorithm}
+In addition to the baseline model, which simply learns the features associated with CS, a voting algorithm was created to improve performance. Rather than train on CS and non CS tweets as positive and negative examples, the voting algorithm employs two separate language classifiers of Swahili and English. Each classifier was trained on two 400,000 token corpora containing literature, and news sources. In addition, nearly 100,000 token corpora were employed to generate negative examples. The features used were character 5-grams, and tokens that occured above a frequency threshold of 10.
+
+As opposed to the baseline model previously described, non-linguistic tokens were also excluded, in order to ensure unambiguously language specific features for each classifier. Furthermore, this model varied from the baseline by treating individual tokens as documents, rather than individual tweets. Judgements of the language of each subdocument (token) was performed based upon the features exctracted from them. Effectively, each classifier was run on each token's feature set. Each classifer labeled the subdocument as a positive or negative hit '0'. With a document, the positibe labels were then added to two separate lists (one for each language), and the totals were compared. If both classifiers returned a non-empty set, then the tweet was labeled as CS. That is, if at least one token was identified as Swahili, and at least one token was identified as English, then it was considered CS. The coming section compares the results of the baseline and voting models.
+
+\subsubsection{Results}
+
+Table 1 outlines the ablation of features used in the baseline model. Clearly, the inculsion of Twitter specific features enhances the ability of the model to predict CS. However, geotags, which could conceivably help the model if users in certain say urban areas were more likely to use CS, were unaffective. Oddly, the inclusion of geotags hinders accuracy, but boosts the F1 score. As a result of the experiment in Table 1, the features used were: character 5-grams, tokens, mentions, hashtags
+
+\begin{table}[h]
+\caption{Feature use in Perceptron Algorithm}
+\centering
+\begin{tabular}{llllll}
+\cline{2-6}
+  & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} &
+                                                               \textbf{F1 Score} & \textbf{Features}          \\ \cline{2-6} 
+1 & 65.00\%     & 0.4977             & 0.4944          & 0.4631            & \textit{Character 5-grams} \\ \cline{2-6} 
+2 & 74.00\%     & 0.5000             & 0.500           & 0.4902            & \textit{Previous+Tokens}   \\ \cline{2-6} 
+3 & 68.00\%     & 0.5050             & 0.5111          & 0.4802            & \textit{Previous+Mentions} \\ \cline{2-6} 
+4 & 78.00\%     & 0.5159             & 0.5222          & 0.5137            & \textit{Previous+Hashtags} \\ \cline{2-6} 
+5 & 76.00\%     & 0.5312             & 0.5556          & 0.5294            & \textit{Previous+Geotags} 
+\end{tabular}
+\end{table}
+
+After isolating the highest performing feature set, both generative (Naive Bayes) and descriminative algorthims ( Perceptron and Logistic Regression) were compared to isolate the best performance. Table 2 demonstrates that Logistic Regresson outperforms the other algorthims to a high degree, and so this algorithm is used in the baseline model.
+
+\begin{table}[h]
+\caption{Best Models using Various Algorithms}
+\centering
+\begin{tabular}{llllll}
+\cline{2-6}
+  & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} & \textbf{Algorithm}               \\ \cline{2-6} 
+1 & 76.00\%           & 0.5312             & 0.5294          & 0.5294            & \textit{Multinomial Naive Bayes} \\ \cline{2-6} 
+2 & 78.00\%           & 0.4977             & 0.4944          & 0.4631            & \textit{Perceptron}              \\ \cline{2-6} 
+3 & 89.00\%           & 0.6893             & 0.6722          & 0.6801            & \textit{Logistic Regression}     \\ \cline{2-6} 
+\end{tabular}
+\end{table}
+
+The highest performance of the baseline model is \%89.00 accuracy, with an F1 score of 0.6801 (line 3: Table 2). To improve on this, the voting model was developed. Before creating such a model however, each the highest performing baseline model was tested on each language available in training. This test can show us how well the model descriminates individual languages for consideration in the voting model. Table 3 shows that the model's performance is indirectly propostional to the amount of English used in a tweet in a scalar manner.
+
+\begin{table}[h]
+\caption{Best Model + Algorithm detecting various Languages}
+\centering
+\begin{tabular}{llllll}
+\cline{2-6}
+  & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} & \textbf{Language}       \\ \cline{2-6} 
+1 & 80.00\%           & 0.7849             & 0.8128          & 0.5294            & \textit{English}        \\ \cline{2-6} 
+2 & 89.00\%           & 0.6893             & 0.6722          & 0.6801            & \textit{Code Switching} \\ \cline{2-6} 
+3 & 93.00\%           & 0.8114             & 0.7833          & 0.7965            & \textit{Swahili}        \\ \cline{2-6} 
+\end{tabular}
+\end{table}
+
+Whereas Swahili has a rather high performance (\%93.00 accuracy, 0.7965 F1), CS (\%89.00 accuracy, 0.6801 F1), and English (\%80.00 accuracy, 0.52945 F1) fall behind. Based upon the evidence in Table 3, one could ascribe a weight of higher confidence to the detection of Swahili than English in the voting algorithm, however performance was not influenced by weighting. The results of the voting model are shown in Table 4.
+
+\begin{table}[h]
+\caption{Baseline versus Voting Model}
+\centering
+\begin{tabular}{llllll}
+\cline{2-6}
+  & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} & \textbf{Model}       \\ \cline{2-6} 
+1 & 89.00\%           & 0. 6893             & 0.6722          & 0.6801            & \textit{Baseline}        \\ \cline{2-6} 
+2 & 90.00\%           & 0.4500             & 0.5000          & 0.4737
+                                                                                 & \textit{Voting Model} \\ \cline{2-6} 
+\end{tabular}
+\end{table}
+
+The voting algorithm did outperform the baseline model in accuracy, but the F1 score was much lower. This lower score can be ascribed to the fact that the number of (sub)documents is much larger, and that two different classifiers (as opposed to only one) were implemented in the descrimintation task. The results are further discussed in the next section.
+
+\subsubsection{Discussion}
+
+The data show that CS can be detected to a high degree of accuracy given the very low number of training examples and the high performance. It may be the case that increasing the size of training and test examples would increase baseline performance. Furthermore, rather than using news and literature sources as training data in the voting model, using Tweets in each language should increase the model given that that domain of usage is quite different indeed. For the low performance in English in general, I propose that sociolinguistic factors impact the outcomes. Specifically, a cursory looks at the data reveal that people in East Africa tend use text speak in English much more than in Swahili. That is, shortened and novel linguistic forms may be used more often by those who tweet in English rather than Swahili. More concretely, Swahili does not seem to have many examples of altered spelling (e.g. 'c u' for 'see you') or acronyms (e.g. lol for 'laugh out loud'). This sort of difference is unavoidable, and just a consequence of the data.
+
+The overall application in detecting CS is to give insight into the world of language change in the realm of Linguistics, and can additionally have application other NLP tasks (e.g. relation extraction) where CS is common. As performance increases so can the confidence in building a corpors for more detailed analyses of language interaction along with the ability to accurately implement other language applications. Having already collected up to 1 million tweets over time, the highest performing algortihm will be applied to these tweets to generate an openly available corpus of CS collapsing across users. In the future, this project aim to track conversations between individual to ask more discourse oriented questions about code-switching. In theory, the techniques described here can be used in any set of languages to generate corpora of languages where CS is common.
+
+\subsection{Applying the Algorithm to the Corpus}
+
+This part is still to be done. I had done it previously, but have since collected more data, and need to reanalyze.
+
+\subsection{Twitter Corpus Analysis}
+
+Here, I'll take the ratios from the original study and compare them to codeswitched examples, and hapax counts.
+
+
+\bibliographystyle{lsalike}
+\par\bigskip
+\bibliography{diss}
+
+\end{document}

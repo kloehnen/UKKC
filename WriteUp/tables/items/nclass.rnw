@@ -1,0 +1,141 @@
+% Morpheme Chart
+\begin{tabular}{l|l|l|l}
+  % Header with a lot of shortstacks
+  \shortstack{\textbf{Morpheme}     \\  \textbf{Class}}       &
+  \shortstack{\textbf{Form} \\ {\indent}}                     & 
+  \shortstack{\textbf{Grammatical} \\  \textbf{Distinction}}  & 
+  \shortstack{\textbf{Example} \\ {\indent}}
+  \\
+  \hline
+  % Body with all the morphemes tested
+  \hline
+  % Class 1
+  m-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  m- & -sho  \\ 
+  \textsc{cl6} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 2
+  wa-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  wa- &   \\ 
+  \textsc{cl2} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 3
+  m-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  m- & -sho  \\ 
+  \textsc{cl6} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 4
+  mi-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  mi- &   \\ 
+  \textsc{cl2} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 5
+  ji-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  ji- & -sho  \\ 
+  \textsc{cl6} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 6
+  ma-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  ma- &   \\ 
+  \textsc{cl2} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 7
+  ki-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  ki- & -sho  \\ 
+  \textsc{cl6} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 8
+  vi-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  vi- &   \\ 
+  \textsc{cl2} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 9
+  N-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  ji- & -sho  \\ 
+  \textsc{cl6} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+    % Class 10
+  N-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Class}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  N- &   \\ 
+  \textsc{cl2} & \textit{recall}\\
+  \multicolumn{2}{l}{'souvenirs'}\\
+  \end{tabular}\\
+\end{tabular}

@@ -1,0 +1,102 @@
+% Morpheme Char
+\begin{tabular}[t]{l|l|l|l}
+  % Header with a lot of shortstacks
+  \shortstack{\textbf{Morpheme}     \\  \textbf{Class}}       &
+  \shortstack{\textbf{Form} \\ {\indent}}                     & 
+  \shortstack{\textbf{Grammatical} \\  \textbf{Distinction}}  & 
+  \shortstack{\textbf{Example} \\ {\indent}}
+  \\
+  \hline
+  % Body with all the morphemes tested
+  \hline
+  % Class 9 Subject
+  i-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 9} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  i- & -na- & -lisha  \\ 
+  \textsc{cl9} & \textsc{pres} & \textit{graze}\\
+  \multicolumn{3}{l}{'It grazes.}\\
+  \end{tabular}\\
+  \hline
+  % Class 10 Subject
+  zi-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 10} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  zi- & -na- & -lisha  \\ 
+  \textsc{cl10} & \textsc{pres} & \textit{graze}\\
+  \multicolumn{3}{l}{'They graze.'}\\
+  \end{tabular}\\
+  \hline
+  % Class 11/14 Subject
+  u-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 14} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  u- & -na- & -maanisha  \\ 
+  \textsc{cl14} & \textsc{pres} & \textit{mean}\\
+  \multicolumn{3}{l}{'It has meaning.}\\
+  \end{tabular}\\
+  \hline
+  % Class 15 Subject
+  ku-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 15} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{ll} 
+  ku- & -ishi  \\ 
+  \textsc{cl15} & \textit{live}\\
+  \multicolumn{2}{l}{'to live'}\\
+  \end{tabular}\\
+  \hline
+  % Class 16 Subject
+  pa-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 16} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  pa- & -na & watu  \\ 
+  \textsc{cl16} & \textit{have} & \textit{people}\\
+  \multicolumn{3}{l}{'There are people.}\\
+  \end{tabular}\\
+  \hline
+  % Class 17 Subject
+  ku-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 17} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+   \begin{tabular}[t]{lll} 
+  ku- & -na & watu  \\ 
+  \textsc{cl17} & \textit{have} & \textit{people}\\
+  \multicolumn{3}{l}{'There are people.}\\
+  \end{tabular}\\
+  \hline
+  % Class 18 Subject
+  m-   &
+  Prefix &
+  \begin{tabular}[t]{l} 
+  \textit{Class 18} \\
+  \textit{Subject Agreement}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  m- & -na & watu  \\ 
+  \textsc{cl18} & \textit{have} & \textit{people}\\
+  \multicolumn{3}{l}{'There are people.}\\
+  \end{tabular}\\
+\end{tabular}

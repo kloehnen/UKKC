@@ -1,0 +1,166 @@
+% Morpheme Chart
+\begin{tabular}[t]{l|l|l|l}
+  % Header with a lot of shortstacks
+  \shortstack{\textbf{Morpheme}     \\  \textbf{Class}}       &
+  \shortstack{\textbf{Form} \\ {\indent}}                     & 
+  \shortstack{\textbf{Grammatical} \\  \textbf{Distinction}}  & 
+  \shortstack{\textbf{Example} \\ {\indent}}
+  \\
+  \hline
+  % Body with all the morphemes tested
+  \hline
+  % Der: sha
+  -sha   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -sha  \\ 
+  \textsc{cl6} & \textit{occur} & \textsc{der}\\
+  \multicolumn{3}{l}{'results'}\\
+  \end{tabular}\\
+  \hline
+  % Der: shi
+  -shi   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -shi  \\ 
+  \textsc{cl6} & \textit{fight} & \textsc{der}\\
+  \multicolumn{3}{l}{'clashes'}\\
+  \end{tabular}\\
+  \hline
+  % Der: shio
+  -shio   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -shio  \\ 
+  \textsc{cl6} & \textit{occur} & \textsc{der}\\
+  \multicolumn{3}{l}{'results'}\\
+  \end{tabular}\\
+  \hline
+  % Der: sho
+  -sho   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  ma- & -kumbu- & -sho  \\ 
+  \textsc{cl6} & \textit{recall} & \textsc{der}\\
+  \multicolumn{3}{l}{'souvenirs'}\\
+  \end{tabular}\\
+  \hline
+  % Der: si
+  -si   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -si  \\ 
+  \textsc{cl6} & \textit{occur} & \textsc{der}\\
+  \multicolumn{3}{l}{'results'}\\
+  \end{tabular}\\
+  \hline
+  % Der: so
+  -so   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -so  \\ 
+  \textsc{cl6} & \textit{fight} & \textsc{der}\\
+  \multicolumn{3}{l}{'clashes'}\\
+  \end{tabular}\\
+  \hline
+  % Der: uo
+  -uo   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -uo  \\ 
+  \textsc{cl6} & \textit{occur} & \textsc{der}\\
+  \multicolumn{3}{l}{'results'}\\
+  \end{tabular}\\
+  \hline
+  % Der: vi
+  -vi   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -vi  \\ 
+  \textsc{cl6} & \textit{occur} & \textsc{der}\\
+  \multicolumn{3}{l}{'results'}\\
+  \end{tabular}\\
+  \hline
+  % Der: vu
+  -vu   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -vu  \\ 
+  \textsc{cl6} & \textit{fight} & \textsc{der}\\
+  \multicolumn{3}{l}{'clashes'}\\
+  \end{tabular}\\
+  \hline
+  % Der: wa
+  -wa   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -wa  \\ 
+  \textsc{cl6} & \textit{occur} & \textsc{der}\\
+  \multicolumn{3}{l}{'results'}\\
+  \end{tabular}\\
+  % Der: zi
+  -zi   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -zi  \\ 
+  \textsc{cl6} & \textit{occur} & \textsc{der}\\
+  \multicolumn{3}{l}{'results'}\\
+  \end{tabular}\\
+  \hline
+  % Der: zo
+  -zo   &
+  Suffix &
+  \begin{tabular}[t]{l} 
+  \textit{Nominal} \\
+  \textit{Derivation}
+  \end{tabular} &
+  \begin{tabular}[t]{lll} 
+  - & -- & -zo  \\ 
+  \textsc{cl6} & \textit{fight} & \textsc{der}\\
+  \multicolumn{3}{l}{'clashes'}\\
+  \end{tabular}\\
+\end{tabular}

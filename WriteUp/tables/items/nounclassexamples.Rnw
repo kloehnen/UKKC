@@ -1,0 +1,156 @@
+% Noun Class Chart
+  \begin{tabular}[t]{lllll}
+    % Header with a lot of shortstacks to save spacing
+    \shortstack{\textbf{Noun}     \\  \textbf{Class}}       &
+    \shortstack{\textbf{Prefix}   \\  \textbf{SG/PL}}       & 
+    \shortstack{\textbf{Semantic} \\  \textbf{Distinction}} & 
+    \multicolumn{2}{c}{
+      \shortstack{\textbf{Example}   \\  \textbf{SG/PL}}
+      }                          
+    \\
+    % Body with Noun Classes and Examples  
+    \hline
+    
+    % Classes one and Two
+    1/2   &
+    m-/wa-  &
+    \textit{humans} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      m- & -swahili  \\ 
+      \textsc{cl1} & swahili  \\
+      \multicolumn{2}{l}{'swahili person'}\\
+    \end{tabular} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      wa- & -swahili  \\ 
+      \textsc{cl2} & swahili  \\
+      \multicolumn{2}{l}{'swahili people'}\\
+    \end{tabular}
+    \\
+    \hline
+    
+    %Classes 3 and 4
+    3/4   &
+    m-/mi-  &
+    \textit{plants} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      m- & -nazi  \\ 
+      \textsc{cl3} & coconut  \\
+      \multicolumn{2}{l}{'coconut tree'}\\
+    \end{tabular} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      mi- & -nazi  \\ 
+      \textsc{cl4} & nazi  \\
+      \multicolumn{2}{l}{'coconut trees'}\\
+    \end{tabular}
+    \\
+    \hline
+    
+    % Classes 5 and 6
+    5/6   &
+    ji-/ma-  &
+    \begin{tabular}[t]{l}
+      \textit{groups} \\
+      \textit{augments}
+    \end{tabular} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      ji- & -cho  \\ 
+      \textsc{cl5} & eye  \\
+      \multicolumn{2}{l}{'eye'}\\
+    \end{tabular} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      ma- & -cho  \\ 
+      \textsc{cl6} & eye  \\
+      \multicolumn{2}{l}{'eyes'}\\
+    \end{tabular}
+    \\
+    \hline
+    
+    % Classes 7 and 8
+    7/8   &
+    ki-/vi-  &
+    \begin{tabular}[t]{l}
+      \textit{tools} \\
+      \textit{diminutives}
+    \end{tabular} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+    ki- & -atu  \\ 
+      \textsc{cl7}& shoe  \\
+      \multicolumn{2}{l}{'shoe'}\\
+    \end{tabular} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      vi- & -atu  \\ 
+      \textsc{cl8} & eye  \\
+      \multicolumn{2}{l}{'shoes'}\\
+    \end{tabular}
+    \\
+    \hline
+    
+    %Classes 9 and 10
+    9/10   &
+    N-/N-  &
+    \begin{tabular}[t]{l}
+      \textit{animals} \\
+      \textit{loan words}
+    \end{tabular} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      m- & -buga  \\ 
+      \textsc{cl9} & savannah  \\
+      \multicolumn{2}{l}{'savannah'}\\
+    \end{tabular} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      m- & -buga  \\ 
+      \textsc{cl10} & savannah  \\
+      \multicolumn{2}{l}{'savannahs'}\\
+    \end{tabular}
+    \\
+    \hline
+    
+    %Class 11
+    11   &
+    u-   &
+    \textit{extension} & &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      u- & -nywele  \\ 
+      \textsc{cl11} & hair  \\
+      \multicolumn{2}{l}{'hair'}\\
+    \end{tabular} 
+    \\
+    \hline
+  
+    %Class 14
+    14   &
+    u-   &
+    \textit{abstraction} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      u- & -moja  \\ 
+      \textsc{cl14} & one  \\
+      \multicolumn{2}{l}{'unity'}\\
+    \end{tabular} &
+    \\
+    \hline
+    
+    %Class 15
+    15   &
+    ku-   &
+    \textit{infinitive} &
+    \renewcommand{\arraystretch}{0.5}
+    \begin{tabular}[t]{ll} 
+      ku- & -ongea  \\ 
+      \textsc{cl15} & talk  \\
+      \multicolumn{2}{l}{'to talk/ talking'}\\
+    \end{tabular} &
+    \\
+  \end{tabular}
+\\

@@ -1,0 +1,45 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Baayen}{1992}]{baay92}
+{\sc Baayen, Harald}.
+\newblock 1992.
+\newblock Quantitative aspects of morphological productivity.
+\newblock In {\em Yearbook of morphology 1991\/}, 109--149. Springer.
+
+\bibitem[\protect\citeauthoryear{Blevins {\em et~al.\/}}{2015}]{blev2015}
+{\sc Blevins, James~P}, {\sc Farrell Ackerman},  \lsaand {\sc Robert Malouf}.
+\newblock 2015.
+\newblock Morphology as an adaptive discriminative system.
+\newblock {\em Morphological metatheory, Amsterdam and Philadelphia: John
+  Benjamins\/} .
+
+\bibitem[\protect\citeauthoryear{Col{\'e} {\em et~al.\/}}{1989}]{cole89}
+{\sc Col{\'e}, Pascale}, {\sc C{\'e}cile Beauvillain},  \lsaand {\sc Juan
+  Segui}.
+\newblock 1989.
+\newblock On the representation and processing of prefixed and suffixed derived
+  words: A differential frequency effect.
+\newblock {\em Journal of Memory and language\/} 28.1--13.
+
+\bibitem[\protect\citeauthoryear{for Asian {\em et~al.\/}}{2004}]{hcs}
+{\sc for Asian, Compilers:~Institute}, {\sc African Studies~(University
+  of~Helsinki)},  \lsaand {\sc CSC – IT~Center for Science.}
+\newblock 2004.
+\newblock Helsinki corpus of swahili.
+
+\bibitem[\protect\citeauthoryear{Hay \lsaand Baayen}{2002}]{hay02}
+{\sc Hay, Jennifer},  \lsaand {\sc Harald Baayen}.
+\newblock 2002.
+\newblock Parsing and productivity.
+\newblock In {\em Yearbook of Morphology 2001\/}, 203--235. Springer.
+
+\bibitem[\protect\citeauthoryear{Tan {\em et~al.\/}}{2014}]{tan14}
+{\sc Tan, Liling}, {\sc Marcos Zampieri}, {\sc Nikola Ljube{\v{s}}ic},  \lsaand
+  {\sc J{\"o}rg Tiedemann}.
+\newblock 2014.
+\newblock Merging comparable data sources for the discrimination of similar
+  languages: The dsl corpus collection.
+\newblock In {\em Proceedings of The 7th Workshop on Building and Using
+  Comparable Corpora (BUCC)\/}.
+
+\end{thebibliography}

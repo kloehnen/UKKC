@@ -1,0 +1,67 @@
+  % Morpheme Chart
+  \begin{tabular}[t]{l|l|l|l}
+  % Header with a lot of shortstacks
+  \shortstack{\textbf{Morpheme}     \\  \textbf{Class}}       &
+  \shortstack{\textbf{Form} \\ {\indent}}                                  & 
+  \shortstack{\textbf{Grammatical} \\  \textbf{Distinction}}  & 
+  \shortstack{\textbf{Example} \\ {\indent}}
+  \\
+  \hline
+  % Body with all the morphemes tested
+  \hline
+  % Passive
+  -(i/e)w-   &
+  Infix &
+  \textit{Passive} &
+  \begin{tabular}[t]{lll} 
+  pe- & -w- & -a  \\ 
+  \textit{give} & \textsc{pass} & \textsc{fv}\\
+  \multicolumn{3}{l}{'be given'}\\
+  \end{tabular}\\
+  \hline
+   % Stative
+  -(i/e)k-   &
+  Infix  &
+  \textit{Stative} &
+  \begin{tabular}[t]{lll} 
+  sik- & -ik- & -a  \\ 
+  \textit{hear} & \textsc{stat} & \textsc{fv}\\
+  \multicolumn{3}{l}{'be heard'}\\
+  \end{tabular}\\
+  \hline
+     % Applicative
+  \begin{tabular}{l}
+  -(l)i- \\ -(l)e- 
+  \end{tabular} &
+  Infix  &
+  \textit{Applicative} &
+  \begin{tabular}[t]{lll} 
+  pelek- & -e- & -a  \\
+  \textit{send} & \textsc{appl} & \textsc{fv}\\
+  \multicolumn{3}{l}{'send to'}\\
+  \end{tabular}\\
+  \hline
+  % Causative
+  \begin{tabular}{l}
+    -(i/e)z- \\ -(i/e)sh-
+  \end{tabular} &
+  Infix &
+  \textit{Causative} &
+  \begin{tabular}[t]{lll} 
+  ele- & -z- & -a  \\ 
+  \textit{be clear} & \textsc{caus} & \textsc{fv}\\
+  \multicolumn{3}{l}{'make clear'}\\
+  \end{tabular}\\ 
+  \hline
+  % Reciprocal
+  -an-   &
+  Infix  &
+  \textit{Reciprocal} &
+  \begin{tabular}[t]{lll} 
+  pig- & -an- & -a  \\ 
+  \textit{hit} & \textsc{recip} & \textsc{fv}\\
+  \multicolumn{3}{l}{'fight'}\\
+  \end{tabular}\\ 
+  % Body with all the morphemes tested
+\end{tabular}
+\\

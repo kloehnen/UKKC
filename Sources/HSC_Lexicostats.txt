@@ -1,0 +1,22 @@
+Category	Frequency
+Total tokens	13760988
+Adjectives	905034
+Verbs	2881258
+Nouns	3991124
+Nouns derived from Adjectives	28828
+Nouns derived from Verbs	605476
+Class 1	340190
+Class 2	321508
+Class 3	272948
+Class 4	92769
+Class 5	242823
+Class 6	388456
+Class 7	162452
+Class 8	110334
+Class 9	1461811
+Class 10	231692
+Class 11	359810
+Class 12	1459
+Class 13	3644
+Class 14	382
+Class 15	846

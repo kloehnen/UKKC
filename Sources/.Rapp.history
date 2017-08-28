@@ -1,0 +1,79 @@
+setwd("/Users/pokea/Documents/Work/UofA/Current/Dissertation/Dissertation_WriteUp/Shared/chapters/Chapter2_Sources/")
+setwd('../chapters/Chapter2_Sources')#
+#
+# Read in kfolds data#
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)#
+#
+# Make it a dataframe#
+Main <- data.frame(Main)#
+#
+# Calculate Type Ratio#
+Main <- transform(Main, Ratio = Above / Total)#
+#
+# Replace ones divided by zero with zero#
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0#
+#
+# Convert the frequency counts to logarithmic scale#
+Main$loghap <- log(Main$Hapaxes)#
+#
+# Replace ones divided by zero with zero#
+Main$loghap[ is.nan(Main$loghap ) ] <- 0#
+#
+# Replace negative values with zero#
+Main$loghap[ Main$loghap < 0 ] <- 0#
+#
+# Ratio is the independant variable, and hapaxes are the dependent variable#
+plot(loghap ~ Yintercept, data = Main,#
+  xlim=c(0, 2),#
+  ylim=c(0, 10),#
+  xlab = "Cumulative Root Type Y-Intercept",#
+  ylab = "Log Number of Hapaxes per Type",#
+  main = "All Affixes"#
+)#
+#
+hd.mod1 = lm(loghap ~ Yintercept, data = Main)#
+#
+abline(fit <- lm(loghap ~ Ratio, data=Main), col='red')#
+legend("topleft", bty="n", legend=paste("r-squared is", #
+  format(summary(fit)$adj.r.squared, digits=4)))#
+#
+summary(hd.mod1)
+setwd('../chapters/Chapter2_Sources')#
+#
+# Read in kfolds data#
+Main <- read.table("kfolds_Redo", sep="\t", header=TRUE)#
+#
+# Make it a dataframe#
+Main <- data.frame(Main)#
+#
+# Calculate Type Ratio#
+Main <- transform(Main, Ratio = Above / Total)#
+#
+# Replace ones divided by zero with zero#
+Main$Ratio[ is.nan( Main$Ratio ) ] <- 0#
+#
+# Convert the frequency counts to logarithmic scale#
+Main$loghap <- log(Main$Hapaxes)#
+#
+# Replace ones divided by zero with zero#
+Main$loghap[ is.nan(Main$loghap ) ] <- 0#
+#
+# Replace negative values with zero#
+Main$loghap[ Main$loghap < 0 ] <- 0#
+#
+# Ratio is the independant variable, and hapaxes are the dependent variable#
+plot(loghap ~ Slope, data = Main,#
+  xlim=c(0, 2),#
+  ylim=c(0, 10),#
+  xlab = "Cumulative Root Type Slope",#
+  ylab = "Log Number of Hapaxes per Type",#
+  main = "All Affixes"#
+)#
+#
+hd.mod1 = lm(loghap ~ Slope, data = Main)#
+#
+abline(fit <- lm(loghap ~ Slope, data=Main), col='red')#
+legend("topleft", bty="n", legend=paste("r-squared is", #
+  format(summary(fit)$adj.r.squared, digits=4)))#
+#
+summary(hd.mod1)
