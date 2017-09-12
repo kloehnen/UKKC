@@ -79,10 +79,7 @@ emoticon_string = r"""
 # Based upon Twitter's regex described here: <https://blog.twitter.com/2013/symbols-entities-tweets>.
 cashtag_string = r"""(?:\$[a-zA-Z]{1,6}([._][a-zA-Z]{1,2})?)"""
 
-# The components of the tokenizer:
-regex_strings = (
-    # Phone numbers:
-    r"""
+phonenum = r"""
     (?:
       (?:            # (international)
         \+?[01]
@@ -97,18 +94,27 @@ regex_strings = (
       [\-\s.]*   
       \d{4}          # base
     )"""
+
+html = r"""(?:<[^>]+>)"""
+url = r"""(?:http[s]?://t.co/[a-zA-Z0-9]+)"""
+username = r"""(?:@[\w_]+)"""
+
+# The components of the tokenizer:
+regex_strings = (
+    # Phone numbers:
+    phonenum
     ,
     # Emoticons:
     emoticon_string
     ,
     # HTML tags:
-    r"""(?:<[^>]+>)"""
+    html
     ,
     # URLs:
-    r"""(?:http[s]?://t.co/[a-zA-Z0-9]+)"""
+    url
     ,
     # Twitter username:
-    r"""(?:@[\w_]+)"""
+    username
     ,
     # Twitter hashtags:
     r"""(?:\#+[\w_]+[\w\'_\-]*[\w_]+)"""
@@ -162,6 +168,25 @@ class TweetTokenizer(object):
         if self.preserve_case:
             return [match.group() for match in matches]
         return [self._normalize_token(match.group()) for match in matches]
+
+
+    def replace(self, tweetlist: list) -> list:
+        """
+        Argument: tweetlist -- a tokenizedtweet.
+        Value: a tokenized list of strings, with names and urls replaced with tokens;
+        """
+        replaced = []
+        for tok in tweetlist:
+            current = tok
+            if re.match(username, tok):
+                replaced.append("@USER")
+            elif re.match(url, tok):
+                replaced.append("URL")
+            elif re.match(html, tok):
+                replaced.append("HTML")
+            else:
+                replaced.append(current)
+        return replaced
 
     @staticmethod
     def _normalize_token(token: str) -> str:
